@@ -50,25 +50,26 @@ die()
 
 parse_file()
 {
-	cd $( dirname $1)
+	# Go into containing directory and get pure filename
+	cd $(dirname $1)
+	file=$(basename $1)
 	# Increment number of files parsed
 	((count++))
 	# Run a single sql file
-	echo -e "\n*****  Processing $1 *****\n"
-	toRun="${cmd} -f ${1}"
+	echo -e "\n*****  Processing $file *****\n"
+	toRun="${cmd} -f ${file}"
 	eval " $toRun"
 	# check status within the script
 	if [[ $? != 0 ]]; then
-		die "Error in file $1." 5
+		die "Error in file $file." 5
 	fi
 	# successfully finished
-	echo -e "\n***** Finished $1 *****\n"
+	echo -e "\n***** Finished $file *****\n"
 }
 
 parse_directory()
 {
 	# Run all sql files in the folder
-	cd $fname
 	for filename in $fname/*; do
 		if [[ $filename == *.sql ]]; then
 			parse_file $filename
