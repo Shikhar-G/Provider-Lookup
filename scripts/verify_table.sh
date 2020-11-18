@@ -1,9 +1,9 @@
 #!/bin/bash
 #***************************************************************************************#
 #										        #
-# FILE: verify_table.sh							        #
+# FILE: verify_table.sh								        #
 #										        #
-# USAGE: verify_table.sh [-h] [-d <database_name>] -t <table_name> -f <path>  #
+# USAGE: verify_table.sh [-h] [-d <database_name>] -t <table_name> -f <path>  		#
 #										        #
 # DESCRIPTION: Verifies that a PostgreSQL table imported all data from a CSV file.	#
 #											#
@@ -12,8 +12,8 @@
 # ERROR CONDITIONS: exit 1 ---- Invalid option						#
 #                   exit 2 ----	PostgreSQL not installed		              	#
 #                   exit 3 ----	Invalid file or folder given				#
-#                   exit 4 ----	Error in psql		#
-#                   exit 5 ----	Error in parsing csv				#
+#                   exit 4 ----	Error in psql						#
+#                   exit 5 ----	Error in parsing csv					#
 #                   exit 99 ---	killed by external forces				#
 #											#
 # DEVELOPER: Shikhar Gupta								#
