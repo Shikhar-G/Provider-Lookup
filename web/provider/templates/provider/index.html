@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  </head>
+  <body>
+
+  {% include 'provider/messages.html' %}
+
+    <div class="container d-flex justify-content-center position-relative align-items-center">
+        <h1 class="display-4 page-header text-center">Medical Provider Lookup</h1>
+    </div>
+
+    <div class="d-flex justify-content-center align-items-center position-relative container ">
+    <form action="/provider/search" method="get">
+        <div class="form-row justify-content-center align-items-center">
+            <div class="form-group col-md-4">
+                <label for="last_name">Last Name</label>
+                <input id="last_name" class="form-control" type="text" name="last_name">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="first_name">First Name</label>
+                <input id="first_name" class="form-control" type="text" name="first_name">
+            </div>
+        </div>
+        <div class="form-row justify-content-center align-items-center">
+            <div class="form-group col-md-4">
+                <label for="city">City</label>
+                <input id="city" class="form-control" type="text" name="city">
+            </div>
+            <div class="form-group col-md-2">
+                <label class="text-center" for="state">State</label>
+                <select name="state" class="form-control" id="state">
+                    <option value="">Any</option>
+                    <option value="AL">Alabama</option>
+                    <option value="AK">Alaska</option>
+                    <option value="AZ">Arizona</option>
+                    <option value="AR">Arkansas</option>
+                    <option value="CA">California</option>
+                    <option value="CO">Colorado</option>
+                    <option value="CT">Connecticut</option>
+                    <option value="DE">Delaware</option>
+                    <option value="DC">District Of Columbia</option>
+                    <option value="FL">Florida</option>
+                    <option value="GA">Georgia</option>
+                    <option value="HI">Hawaii</option>
+                    <option value="ID">Idaho</option>
+                    <option value="IL">Illinois</option>
+                    <option value="IN">Indiana</option>
+                    <option value="IA">Iowa</option>
+                    <option value="KS">Kansas</option>
+                    <option value="KY">Kentucky</option>
+                    <option value="LA">Louisiana</option>
+                    <option value="ME">Maine</option>
+                    <option value="MD">Maryland</option>
+                    <option value="MA">Massachusetts</option>
+                    <option value="MI">Michigan</option>
+                    <option value="MN">Minnesota</option>
+                    <option value="MS">Mississippi</option>
+                    <option value="MO">Missouri</option>
+                    <option value="MT">Montana</option>
+                    <option value="NE">Nebraska</option>
+                    <option value="NV">Nevada</option>
+                    <option value="NH">New Hampshire</option>
+                    <option value="NJ">New Jersey</option>
+                    <option value="NM">New Mexico</option>
+                    <option value="NY">New York</option>
+                    <option value="NC">North Carolina</option>
+                    <option value="ND">North Dakota</option>
+                    <option value="OH">Ohio</option>
+                    <option value="OK">Oklahoma</option>
+                    <option value="OR">Oregon</option>
+                    <option value="PA">Pennsylvania</option>
+                    <option value="RI">Rhode Island</option>
+                    <option value="SC">South Carolina</option>
+                    <option value="SD">South Dakota</option>
+                    <option value="TN">Tennessee</option>
+                    <option value="TX">Texas</option>
+                    <option value="UT">Utah</option>
+                    <option value="VT">Vermont</option>
+                    <option value="VA">Virginia</option>
+                    <option value="WA">Washington</option>
+                    <option value="WV">West Virginia</option>
+                    <option value="WI">Wisconsin</option>
+                    <option value="WY">Wyoming</option>
+                </select>
+            </div>
+            <div class="form-group col-md-2">
+                <label for="zip">Zip</label>
+                <input id="zip" class="form-control" type="text" name="zip">
+            </div>
+        </div>
+        <div class="row justify-content-center align-items-center">
+        <div class="form-group col-md-8">
+            <label for="description">Description</label>
+            <select name="description" class="form-control" id="description">
+                <option value="">Any</option>
+                <option value="Acupuncturist">Acupuncturist</option>
+                <option value="Adult Companion">Adult Companion</option>
+                <option value="Advanced Practice Dental Therapist">Advanced Practice Dental Therapist</option>
+                <option value="Advanced Practice Midwife">Advanced Practice Midwife</option>
+                <option value="Allergy & Immunology">Allergy & Immunology</option>
+                <option value="Alzheimer Center (Dementia Center)">Alzheimer Center (Dementia Center)</option>
+                <option value="Ambulance">Ambulance</option>
+                <option value="Anaplastologist">Anaplastologist</option>
+                <option value="Anesthesiologist Assistant">Anesthesiologist Assistant</option>
+                <option value="Anesthesiology">Anesthesiology</option>
+                <option value="Art Therapist">Art Therapist</option>
+                <option value="Assistant Behavior Analyst">Assistant Behavior Analyst</option>
+                <option value="Assistant, Podiatric">Assistant, Podiatric</option>
+                <option value="Assisted Living Facility">Assisted Living Facility</option>
+                <option value="Audiologist">Audiologist</option>
+                <option value="Audiologist-Hearing Aid Fitter">Audiologist-Hearing Aid Fitter</option>
+                <option value="Behavior Analyst">Behavior Analyst</option>
+                <option value="Behavior Technician">Behavior Technician</option>
+                <option value="Blood Bank">Blood Bank</option>
+                <option value="Bus">Bus</option>
+                <option value="Case Management">Case Management</option>
+                <option value="Case Manager/Care Coordinator">Case Manager/Care Coordinator</option>
+                <option value="Chiropractor">Chiropractor</option>
+                <option value="Chore Provider">Chore Provider</option>
+                <option value="Chronic Disease Hospital">Chronic Disease Hospital</option>
+                <option value="Clinic/Center">Clinic/Center</option>
+                <option value="Clinical Ethicist">Clinical Ethicist</option>
+                <option value="Clinical Exercise Physiologist">Clinical Exercise Physiologist</option>
+                <option value="Clinical Medical Laboratory">Clinical Medical Laboratory</option>
+                <option value="Clinical Neuropsychologist">Clinical Neuropsychologist</option>
+                <option value="Clinical Nurse Specialist">Clinical Nurse Specialist</option>
+                <option value="Clinical Pharmacology">Clinical Pharmacology</option>
+                <option value="Colon & Rectal Surgery">Colon & Rectal Surgery</option>
+                <option value="Community Based Residential Treatment Facility, Intellectual and/or Developmental Disabilities">Community Based Residential Treatment Facility, Intellectual and/or Developmental Disabilities</option>
+                <option value="Community Based Residential Treatment Facility, Mental Illness">Community Based Residential Treatment Facility, Mental Illness</option>
+                <option value="Community Health Worker">Community Health Worker</option>
+                <option value="Community/Behavioral Health">Community/Behavioral Health</option>
+                <option value="Contractor">Contractor</option>
+                <option value="Counselor">Counselor</option>
+                <option value="Custodial Care Facility">Custodial Care Facility</option>
+                <option value="Dance Therapist">Dance Therapist</option>
+                <option value="Day Training, Developmentally Disabled Services">Day Training, Developmentally Disabled Services</option>
+                <option value="Day Training/Habilitation Specialist">Day Training/Habilitation Specialist</option>
+                <option value="Dental Assistant">Dental Assistant</option>
+                <option value="Dental Hygienist">Dental Hygienist</option>
+                <option value="Dental Laboratory">Dental Laboratory</option>
+                <option value="Dental Laboratory Technician">Dental Laboratory Technician</option>
+                <option value="Dental Therapist">Dental Therapist</option>
+                <option value="Dentist">Dentist</option>
+                <option value="Denturist">Denturist</option>
+                <option value="Department of Veterans Affairs (VA) Pharmacy">Department of Veterans Affairs (VA) Pharmacy</option>
+                <option value="Dermatology">Dermatology</option>
+                <option value="Developmental Therapist">Developmental Therapist</option>
+                <option value="Dietary Manager">Dietary Manager</option>
+                <option value="Dietetic Technician, Registered">Dietetic Technician, Registered</option>
+                <option value="Dietitian, Registered">Dietitian, Registered</option>
+                <option value="Doula">Doula</option>
+                <option value="Driver">Driver</option>
+                <option value="Durable Medical Equipment & Medical Supplies">Durable Medical Equipment & Medical Supplies</option>
+                <option value="Early Intervention Provider Agency">Early Intervention Provider Agency</option>
+                <option value="Electrodiagnostic Medicine">Electrodiagnostic Medicine</option>
+                <option value="Emergency Medical Technician, Basic">Emergency Medical Technician, Basic</option>
+                <option value="Emergency Medical Technician, Intermediate">Emergency Medical Technician, Intermediate</option>
+                <option value="Emergency Medical Technician, Paramedic">Emergency Medical Technician, Paramedic</option>
+                <option value="Emergency Medicine">Emergency Medicine</option>
+                <option value="Emergency Response System Companies">Emergency Response System Companies</option>
+                <option value="Epilepsy Unit">Epilepsy Unit</option>
+                <option value="Exclusive Provider Organization">Exclusive Provider Organization</option>
+                <option value="Eyewear Supplier">Eyewear Supplier</option>
+                <option value="Family Medicine">Family Medicine</option>
+                <option value="Foster Care Agency">Foster Care Agency</option>
+                <option value="Funeral Director">Funeral Director</option>
+                <option value="General Acute Care Hospital">General Acute Care Hospital</option>
+                <option value="General Practice">General Practice</option>
+                <option value="Genetic Counselor, MS">Genetic Counselor, MS</option>
+                <option value="Health Educator">Health Educator</option>
+                <option value="Health Maintenance Organization">Health Maintenance Organization</option>
+                <option value="Hearing Aid Equipment">Hearing Aid Equipment</option>
+                <option value="Hearing Instrument Specialist">Hearing Instrument Specialist</option>
+                <option value="Home Delivered Meals">Home Delivered Meals</option>
+                <option value="Home Health">Home Health</option>
+                <option value="Home Health Aide">Home Health Aide</option>
+                <option value="Home Infusion">Home Infusion</option>
+                <option value="Homemaker">Homemaker</option>
+                <option value="Homeopath">Homeopath</option>
+                <option value="Hospice Care, Community Based">Hospice Care, Community Based</option>
+                <option value="Hospice, Inpatient">Hospice, Inpatient</option>
+                <option value="Hospitalist">Hospitalist</option>
+                <option value="In Home Supportive Care">In Home Supportive Care</option>
+                <option value="Independent Medical Examiner">Independent Medical Examiner</option>
+                <option value="Intermediate Care Facility, Mental Illness">Intermediate Care Facility, Mental Illness</option>
+                <option value="Intermediate Care Facility, Mentally Retarded">Intermediate Care Facility, Mentally Retarded</option>
+                <option value="Internal Medicine">Internal Medicine</option>
+                <option value="Interpreter">Interpreter</option>
+                <option value="Kinesiotherapist">Kinesiotherapist</option>
+                <option value="Lactation Consultant, Non-RN">Lactation Consultant, Non-RN</option>
+                <option value="Legal Medicine">Legal Medicine</option>
+                <option value="Licensed Practical Nurse">Licensed Practical Nurse</option>
+                <option value="Licensed Psychiatric Technician">Licensed Psychiatric Technician</option>
+                <option value="Licensed Vocational Nurse">Licensed Vocational Nurse</option>
+                <option value="Local Education Agency (LEA)">Local Education Agency (LEA)</option>
+                <option value="Lodging">Lodging</option>
+                <option value="Long Term Care Hospital">Long Term Care Hospital</option>
+                <option value="Marriage & Family Therapist">Marriage & Family Therapist</option>
+                <option value="Massage Therapist">Massage Therapist</option>
+                <option value="Mastectomy Fitter">Mastectomy Fitter</option>
+                <option value="Meals">Meals</option>
+                <option value="Mechanotherapist">Mechanotherapist</option>
+                <option value="Medical Foods Supplier">Medical Foods Supplier</option>
+                <option value="Medical Genetics">Medical Genetics</option>
+                <option value="Medical Genetics, Ph.D. Medical Genetics">Medical Genetics, Ph.D. Medical Genetics</option>
+                <option value="Medicare Defined Swing Bed Unit">Medicare Defined Swing Bed Unit</option>
+                <option value="Midwife">Midwife</option>
+                <option value="Midwife, Lay">Midwife, Lay</option>
+                <option value="Military Clinical Medical Laboratory">Military Clinical Medical Laboratory</option>
+                <option value="Military Health Care Provider">Military Health Care Provider</option>
+                <option value="Military Hospital">Military Hospital</option>
+                <option value="Military/U.S. Coast Guard Pharmacy">Military/U.S. Coast Guard Pharmacy</option>
+                <option value="Military/U.S. Coast Guard Transport">Military/U.S. Coast Guard Transport</option>
+                <option value="Multi-Specialty">Multi-Specialty</option>
+                <option value="Music Therapist">Music Therapist</option>
+                <option value="Naprapath">Naprapath</option>
+                <option value="Naturopath">Naturopath</option>
+                <option value="Neurological Surgery">Neurological Surgery</option>
+                <option value="Neuromusculoskeletal Medicine & OMM">Neuromusculoskeletal Medicine & OMM</option>
+                <option value="Neuromusculoskeletal Medicine, Sports Medicine">Neuromusculoskeletal Medicine, Sports Medicine</option>
+                <option value="Non-Pharmacy Dispensing Site">Non-Pharmacy Dispensing Site</option>
+                <option value="Non-emergency Medical Transport (VAN)">Non-emergency Medical Transport (VAN)</option>
+                <option value="Nuclear Medicine">Nuclear Medicine</option>
+                <option value="Nurse Anesthetist, Certified Registered">Nurse Anesthetist, Certified Registered</option>
+                <option value="Nurse Practitioner">Nurse Practitioner</option>
+                <option value="Nurse's Aide">Nurse's Aide</option>
+                <option value="Nursing Care">Nursing Care</option>
+                <option value="Nursing Facility/Intermediate Care Facility">Nursing Facility/Intermediate Care Facility</option>
+                <option value="Nursing Home Administrator">Nursing Home Administrator</option>
+                <option value="Nutritionist">Nutritionist</option>
+                <option value="Obstetrics & Gynecology">Obstetrics & Gynecology</option>
+                <option value="Occupational Therapist">Occupational Therapist</option>
+                <option value="Occupational Therapy Assistant">Occupational Therapy Assistant</option>
+                <option value="Ophthalmology">Ophthalmology</option>
+                <option value="Optometrist">Optometrist</option>
+                <option value="Oral & Maxillofacial Surgery">Oral & Maxillofacial Surgery</option>
+                <option value="Oral Medicinist">Oral Medicinist</option>
+                <option value="Orthopaedic Surgery">Orthopaedic Surgery</option>
+                <option value="Orthotic Fitter">Orthotic Fitter</option>
+                <option value="Orthotist">Orthotist</option>
+                <option value="Otolaryngology">Otolaryngology</option>
+                <option value="Pain Medicine">Pain Medicine</option>
+                <option value="Pathology">Pathology</option>
+                <option value="Pediatrics">Pediatrics</option>
+                <option value="Pedorthist">Pedorthist</option>
+                <option value="Peer Specialist">Peer Specialist</option>
+                <option value="Perfusionist">Perfusionist</option>
+                <option value="Personal Emergency Response Attendant">Personal Emergency Response Attendant</option>
+                <option value="Pharmacist">Pharmacist</option>
+                <option value="Pharmacy">Pharmacy</option>
+                <option value="Pharmacy Technician">Pharmacy Technician</option>
+                <option value="Phlebology">Phlebology</option>
+                <option value="Physical Medicine & Rehabilitation">Physical Medicine & Rehabilitation</option>
+                <option value="Physical Therapist">Physical Therapist</option>
+                <option value="Physical Therapy Assistant">Physical Therapy Assistant</option>
+                <option value="Physician Assistant">Physician Assistant</option>
+                <option value="Physiological Laboratory">Physiological Laboratory</option>
+                <option value="Plastic Surgery">Plastic Surgery</option>
+                <option value="Podiatrist">Podiatrist</option>
+                <option value="Poetry Therapist">Poetry Therapist</option>
+                <option value="Point of Service">Point of Service</option>
+                <option value="Portable X-ray and/or Other Portable Diagnostic Imaging Supplier">Portable X-ray and/or Other Portable Diagnostic Imaging Supplier</option>
+                <option value="Preferred Provider Organization">Preferred Provider Organization</option>
+                <option value="Prevention Professional">Prevention Professional</option>
+                <option value="Preventive Medicine">Preventive Medicine</option>
+                <option value="Private Vehicle">Private Vehicle</option>
+                <option value="Program of All-Inclusive Care for the Elderly (PACE) Provider Organization">Program of All-Inclusive Care for the Elderly (PACE) Provider Organization</option>
+                <option value="Prosthetic/Orthotic Supplier">Prosthetic/Orthotic Supplier</option>
+                <option value="Prosthetist">Prosthetist</option>
+                <option value="Psychiatric Hospital">Psychiatric Hospital</option>
+                <option value="Psychiatric Residential Treatment Facility">Psychiatric Residential Treatment Facility</option>
+                <option value="Psychiatric Unit">Psychiatric Unit</option>
+                <option value="Psychiatry & Neurology">Psychiatry & Neurology</option>
+                <option value="Psychoanalyst">Psychoanalyst</option>
+                <option value="Psychologist">Psychologist</option>
+                <option value="Public Health or Welfare">Public Health or Welfare</option>
+                <option value="Pulmonary Function Technologist">Pulmonary Function Technologist</option>
+                <option value="Radiologic Technologist">Radiologic Technologist</option>
+                <option value="Radiology">Radiology</option>
+                <option value="Radiology Practitioner Assistant">Radiology Practitioner Assistant</option>
+                <option value="Recreation Therapist">Recreation Therapist</option>
+                <option value="Recreational Therapist Assistant">Recreational Therapist Assistant</option>
+                <option value="Reflexologist">Reflexologist</option>
+                <option value="Registered Nurse">Registered Nurse</option>
+                <option value="Rehabilitation Counselor">Rehabilitation Counselor</option>
+                <option value="Rehabilitation Hospital">Rehabilitation Hospital</option>
+                <option value="Rehabilitation Practitioner">Rehabilitation Practitioner</option>
+                <option value="Rehabilitation Unit">Rehabilitation Unit</option>
+                <option value="Rehabilitation, Substance Use Disorder Unit">Rehabilitation, Substance Use Disorder Unit</option>
+                <option value="Religious Nonmedical Health Care Institution">Religious Nonmedical Health Care Institution</option>
+                <option value="Religious Nonmedical Nursing Personnel">Religious Nonmedical Nursing Personnel</option>
+                <option value="Religious Nonmedical Practitioner">Religious Nonmedical Practitioner</option>
+                <option value="Residential Treatment Facility, Emotionally Disturbed Children">Residential Treatment Facility, Emotionally Disturbed Children</option>
+                <option value="Residential Treatment Facility, Intellectual and/or Developmental Disabilities">Residential Treatment Facility, Intellectual and/or Developmental Disabilities</option>
+                <option value="Residential Treatment Facility, Physical Disabilities">Residential Treatment Facility, Physical Disabilities</option>
+                <option value="Respiratory Therapist, Certified">Respiratory Therapist, Certified</option>
+                <option value="Respiratory Therapist, Registered">Respiratory Therapist, Registered</option>
+                <option value="Respite Care">Respite Care</option>
+                <option value="Secured Medical Transport (VAN)">Secured Medical Transport (VAN)</option>
+                <option value="Single Specialty">Single Specialty</option>
+                <option value="Skilled Nursing Facility">Skilled Nursing Facility</option>
+                <option value="Sleep Specialist, PhD">Sleep Specialist, PhD</option>
+                <option value="Social Worker">Social Worker</option>
+                <option value="Special Hospital">Special Hospital</option>
+                <option value="Specialist">Specialist</option>
+                <option value="Specialist/Technologist">Specialist/Technologist</option>
+                <option value="Specialist/Technologist Cardiovascular">Specialist/Technologist Cardiovascular</option>
+                <option value="Specialist/Technologist, Health Information">Specialist/Technologist, Health Information</option>
+                <option value="Specialist/Technologist, Other">Specialist/Technologist, Other</option>
+                <option value="Specialist/Technologist, Pathology">Specialist/Technologist, Pathology</option>
+                <option value="Speech-Language Pathologist">Speech-Language Pathologist</option>
+                <option value="Student in an Organized Health Care Education/Training Program">Student in an Organized Health Care Education/Training Program</option>
+                <option value="Substance Abuse Rehabilitation Facility">Substance Abuse Rehabilitation Facility</option>
+                <option value="Supports Brokerage">Supports Brokerage</option>
+                <option value="Surgery">Surgery</option>
+                <option value="Taxi">Taxi</option>
+                <option value="Technician">Technician</option>
+                <option value="Technician, Cardiology">Technician, Cardiology</option>
+                <option value="Technician, Health Information">Technician, Health Information</option>
+                <option value="Technician, Other">Technician, Other</option>
+                <option value="Technician, Pathology">Technician, Pathology</option>
+                <option value="Technician/Technologist">Technician/Technologist</option>
+                <option value="Thoracic Surgery (Cardiothoracic Vascular Surgery)">Thoracic Surgery (Cardiothoracic Vascular Surgery)</option>
+                <option value="Train">Train</option>
+                <option value="Transplant Surgery">Transplant Surgery</option>
+                <option value="Transportation Broker">Transportation Broker</option>
+                <option value="Urology">Urology</option>
+                <option value="Veterinarian">Veterinarian</option>
+                <option value="Voluntary or Charitable">Voluntary or Charitable</option>
+            </select>
+        </div>
+        </div>
+        <div class="row d-flex justify-content-center align-items-center">
+            <input type="submit" class="btn btn-primary center" value="Search">
+        </div>
+
+    </form>
+    </div>
+  </body>
