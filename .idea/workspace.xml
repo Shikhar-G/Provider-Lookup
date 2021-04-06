@@ -3,13 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a108a709-31ac-4101-89dd-2ed2be152a8d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/provider.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/provider.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/nucc_taxonomy_201.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/sql/core_npi.sql" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/sql/core_npi.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/sql/taxonomy.sql" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/sql/taxonomy.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

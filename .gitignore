@@ -8,3 +8,4 @@
 *.DS_Store
 data/NPPES_Data_Dissemination_*
 debug.log
+venv/
