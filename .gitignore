@@ -6,4 +6,5 @@
 *.code-workspace
 .history/
 *.DS_Store
-data/NPPES_Data_Dissemination_November_2020
+data/NPPES_Data_Dissemination_*
+debug.log
