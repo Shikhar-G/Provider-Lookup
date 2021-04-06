@@ -7,5 +7,5 @@
 .history/
 *.DS_Store
 data/NPPES_Data_Dissemination_*
-debug.log
+web/debug.log
 venv/
