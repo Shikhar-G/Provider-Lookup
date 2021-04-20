@@ -5,8 +5,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
+      <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   </head>
   <body>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
   {% include 'provider/messages.html' %}
 
@@ -93,10 +99,10 @@
                 <input id="zip" class="form-control" type="text" name="zip">
             </div>
         </div>
-        <div class="row justify-content-center align-items-center">
+        <div id="desc" class="row justify-content-center align-items-center">
         <div class="form-group col-md-8">
             <label for="description">Description</label>
-            <select name="description" class="form-control" id="description">
+            <select name="description" class="form-control select2" id="description">
                 <option value="">Any</option>
                 <option value="Acupuncturist">Acupuncturist</option>
                 <option value="Adult Companion">Adult Companion</option>
@@ -334,6 +340,12 @@
                 <option value="Veterinarian">Veterinarian</option>
                 <option value="Voluntary or Charitable">Voluntary or Charitable</option>
             </select>
+            <script>
+                $('.select2').select2({
+                theme: 'bootstrap4',
+                width: '100%',
+            });
+            </script>
         </div>
         </div>
         <div class="row d-flex justify-content-center align-items-center">
