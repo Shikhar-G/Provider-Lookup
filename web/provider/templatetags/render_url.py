@@ -1,6 +1,8 @@
 from django import template
 from urllib.parse import urlencode
 from collections import OrderedDict
+import re
+import phonenumbers
 
 register = template.Library()
 
@@ -31,3 +33,12 @@ def url_replace(request, field, value, direction=''):
       dict_[field] = direction + value
 
     return urlencode(OrderedDict(sorted(dict_.items())))
+
+@register.simple_tag
+def replace_addr(value):
+    return str(re.sub('[^A-Za-z0-9,]+', '', value))
+
+@register.simple_tag
+def replace_phone(value):
+    return str(phonenumbers.format_number(phonenumbers.parse(value, 'US'),
+                           phonenumbers.PhoneNumberFormat.NATIONAL))

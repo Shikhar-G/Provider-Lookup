@@ -47,3 +47,16 @@ def search(request):
     context = {'result': result, 'page_range': page_range, 'start_index': start_index,
                'end_index':end_index, 'total_pages': total_pages}
     return render(request, 'provider/search.html', context=context)
+
+def npi(request, id):
+    core = None
+    fullnpi = None
+    try:
+        core = CoreNpi.objects.get(id=id)
+    except CoreNpi.DoesNotExist:
+        pass
+    if core:
+        fullnpi = Npi.objects.get(npi=core.npi)
+    return render(request, 'provider/npi.html', context={'fullnpi': fullnpi, 'core': core})
+
+

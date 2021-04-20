@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  </head>
+  <body>
+  {% load render_url %}
+  <button class="btn btn-outline-primary float-left" style="margin: 1.5em;" onclick="window.history.back();"
+          type="button">&laquo; Back</button>
+  <div class="container text-center">
+  {% if fullnpi and core %}
+    <h2 class="display-3">{{ core.first_name }} {{ core.last_name }}</h2>
+    <h3 class="text-muted">{{ core.description }}</h3>
+    <h5>{% replace_phone core.phone %}</h5>
+    <h5>{{ core.addr_first }}, {{ core.city }}, {{ core.state }}, {{ core.zip }}</h5>
+    <iframe width="600" height="450" style="border:0" loading="lazy" allowfullscreen
+            src="https://www.google.com/maps/embed/v1/place?q={% replace_addr core.addr_first %}+{{ core.zip }}&key=AIzaSyCRQo5-Xt3cUiMbhQE91-Pa-VzfTMpP8SU"></iframe>
+  {% else %}
+    <h1 class="display-3">Provider Not Found.</h1>
+  {% endif %}
+  </div>
+
+
+</body>
+</html>
