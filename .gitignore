@@ -9,3 +9,6 @@
 data/NPPES_Data_Dissemination_*
 web/debug.log
 venv/
+.idea/*
+.env
+**/__pycache__/*
