@@ -1,3 +1,21 @@
+#***************************************************************************************#
+#										        #
+# FILE: data.py								       	        #
+#										        #
+# USAGE: python data.py [-h] [-c <filename>] [-f] 					#
+#										        #
+# DESCRIPTION: Downloads NPI data files from NPPES onto the local machine.		#
+#											#
+# OPTIONS: List options for the script [-h]						#
+#											#
+#											#
+# DEVELOPER: Shikhar Gupta								#
+# DEVELOPER EMAIL: shikhar.gupta.tx@gmail.com 						#
+#											#
+# VERSION: 1.0										#
+# CREATED DATE-TIME: 2021-5-10-07:00 Central Time Zone USA				#
+#											#
+#***************************************************************************************#
 import requests
 from bs4 import BeautifulSoup
 import zipfile

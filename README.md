@@ -4,9 +4,11 @@ Provider Lookup is a web application allowing users to search for individual med
 
 This application is implemented using Python 3 and HTML with the Django framework, and it also uses PostgreSQL for the database.
 
-The data sources for this application come from the NPPES official website: 
+The data sources for this application come from the NPPES official website and the National Uniform Claim Committee: 
 
 https://download.cms.gov/nppes/NPI_Files.html
+
+https://www.nucc.org/index.php/code-sets-mainmenu-41/provider-taxonomy-mainmenu-40/csv-mainmenu-57
 
 ## Requirements
 
