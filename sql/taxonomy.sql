@@ -17,7 +17,7 @@ CREATE TABLE taxonomy(
 
 ----------------------------------------------------------------------------------
 
-\copy taxonomy(code, grouping, classification, specialization, definition, effective_date, deactivation_date, last_mod_date, notes, display_name) FROM '../../data/nucc_taxonomy_210.csv' DELIMITER ',' CSV HEADER
+\copy taxonomy(code, grouping, classification, specialization, definition, effective_date, deactivation_date, last_mod_date, notes, display_name) FROM '../../data/taxonomy.csv' DELIMITER ',' CSV HEADER
 
 ----------------------------------------------------------------------------------
 
@@ -27,8 +27,8 @@ CREATE INDEX idx_code ON taxonomy(code);
 ----------------------------------------------------------------------------------
 
 -- Test that info was imported correctly into the tables
-SELECT * FROM taxonomy LIMIT 5;
-SELECT COUNT(*) from taxonomy;
+--SELECT * FROM taxonomy LIMIT 5;
+--SELECT COUNT(*) from taxonomy;
 
 ----------------------------------------------------------------------------------
 

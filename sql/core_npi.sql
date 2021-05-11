@@ -22,8 +22,8 @@ CREATE TABLE core_npi(
 
 -- Insert data into core_npi table
 INSERT INTO core_npi(npi, last_name, first_name, description, state, city, zip, addr_first, addr_last, phone)
-SELECT npi.npi, npi.last_name, npi.first_name, upper(npi_taxonomy.taxonomy_classification), addresses.state, addresses.city,
-       LEFT(addresses.postal, 5), addresses.line_1, addresses.line_2, addresses.phone
+SELECT npi.npi, npi.last_name, npi.first_name, upper(npi_taxonomy.taxonomy_classification), upper(addresses.state), upper(addresses.city),
+       LEFT(addresses.postal, 5), upper(addresses.line_1), upper(addresses.line_2), addresses.phone
 FROM npi
 INNER JOIN addresses
 ON npi.npi = addresses.npi
@@ -43,7 +43,7 @@ CREATE INDEX description_citystate on core_npi(description, city, state);
 CREATE INDEX description_zip on core_npi(description, zip);
 CREATE INDEX description_firstlast on core_npi(description, first_name, last_name);
 
--- Selects
-SELECT * from core_npi LIMIT 5;
-SELECT COUNT(id) as core_count from core_npi;
+---- Selects
+--SELECT * from core_npi LIMIT 5;
+--SELECT COUNT(id) as core_count from core_npi;
 

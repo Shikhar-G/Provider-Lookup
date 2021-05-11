@@ -6,9 +6,11 @@
 *.code-workspace
 .history/
 *.DS_Store
-data/NPPES_Data_Dissemination_*
+data/npi.csv
+data/pl.csv
 web/debug.log
 venv/
 .idea/*
 .env
 **/__pycache__/*
+curr.txt
