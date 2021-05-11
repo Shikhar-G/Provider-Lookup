@@ -17,7 +17,7 @@ CREATE TABLE taxonomy(
 
 ----------------------------------------------------------------------------------
 
-\copy taxonomy(code, grouping, classification, specialization, definition, effective_date, deactivation_date, last_mod_date, notes, display_name) FROM '../../data/taxonomy.csv' DELIMITER ',' CSV HEADER
+\copy taxonomy(code, grouping, classification, specialization, definition, effective_date, deactivation_date, last_mod_date, notes, display_name) FROM '../data/taxonomy.csv' DELIMITER ',' CSV HEADER
 
 ----------------------------------------------------------------------------------
 

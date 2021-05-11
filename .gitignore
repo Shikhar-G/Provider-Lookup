@@ -14,3 +14,4 @@ venv/
 .env
 **/__pycache__/*
 curr.txt
+**/debug.log

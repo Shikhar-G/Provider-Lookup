@@ -33,7 +33,7 @@ CREATE TABLE addresses(
 
 ----------------------------------------------------------------------------------
 
-\copy raw_pl FROM '../../data/pl.csv' DELIMITER ',' CSV HEADER
+\copy raw_pl FROM '../data/pl.csv' DELIMITER ',' CSV HEADER
 
 INSERT INTO addresses(npi,line_1,line_2,city,state,postal,country,phone,fax)
 SELECT npi,addr_practice_first,addr_practice_second,addr_practice_city,addr_practice_state,addr_practice_postal,addr_practice_country,addr_practice_phone,addr_practice_fax
