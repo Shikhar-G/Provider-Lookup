@@ -26,7 +26,7 @@ pip install -r requirements.txt
 ### Pulling Data
 
 ```commandline
-python data.py
+python scripts/data.py
 ```
 This will pull the latest dataset from the NPPES website into the ```data``` directory and store the latest filename in ```curr.txt```.
 
@@ -49,7 +49,7 @@ Note: This may take a long time to run as the data file to process is more than 
 
 A unique Django secret key must be generated with the following command.
 ```commandline
-python generate_secret.py
+python scripts/generate_secret.py
 ```
 
 Then, necessary migrations from PostgreSQL to Django need to be made for the server to use the PostgreSQL database.

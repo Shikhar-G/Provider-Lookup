@@ -76,8 +76,8 @@ if filename:
             # If url is not found, will print 'not found'
             if int(r.headers['Content-Length']) > 10:
                 # Create folder if doesn't exist
-                if not os.path.exists('data'):
-                    os.makedirs('data')
+                if not os.path.exists('../data'):
+                    os.makedirs('../data')
 
                 # Write the zip file
                 print("Writing zip file..")
