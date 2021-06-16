@@ -10,6 +10,8 @@ https://download.cms.gov/nppes/NPI_Files.html
 
 https://www.nucc.org/index.php/code-sets-mainmenu-41/provider-taxonomy-mainmenu-40/csv-mainmenu-57
 
+*Note: This build is optimized for development purposes only.*
+
 ## Requirements
 
 This application requires Python3, pip, and [PostgreSQL](
