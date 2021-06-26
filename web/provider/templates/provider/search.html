@@ -28,7 +28,7 @@
             <tbody>
                 {% for r in result %}
                 <tr onclick="document.location = '/provider/{{ r.id }}';">
-                    <td>{{ r.last_name }}</a></td>
+                    <td><a href="/provider/{{ r.id }}">{{ r.last_name }}</a></td>
                     <td>{{ r.first_name }} </td>
                     <td>{{ r.description }}</td>
                     <td>{% replace_phone r.phone %}</td>
