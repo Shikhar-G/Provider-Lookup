@@ -2,7 +2,7 @@ asgiref==3.3.4
 beautifulsoup4==4.9.3
 certifi==2020.12.5
 chardet==4.0.0
-Django==3.2
+Django>=3.2
 django-bootstrap4==3.0.0
 django-templateaddons==0.1
 django-user-visit==0.4.1
@@ -17,5 +17,5 @@ requests==2.25.1
 soupsieve==2.2.1
 sqlparse==0.4.1
 ua-parser==0.10.0
-urllib3==1.26.4
+urllib3>=1.26.4
 user-agents==2.2.0
