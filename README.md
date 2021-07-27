@@ -68,6 +68,21 @@ The server will run on port 8000 by default on localhost.
 ```commandline
 python3 web/manage.py runserver
 ```
+## Screenshots
+<p align="center">
+<img width="650" alt="Screen Shot 2020-09-16 at 9 06 11 PM" src="https://user-images.githubusercontent.com/29441672/127089060-90563990-8e2e-4e3a-ae81-f2bf90978496.png">
+</p>
+
+<p align="center">
+<img width="650" alt="Screen Shot 2020-09-16 at 9 06 11 PM" src="https://user-images.githubusercontent.com/29441672/127089139-2e485a86-359b-49f9-9b07-52dcf717b4c4.png">
+</p>
+
+<p align="center">
+<img width="650" alt="Screen Shot 2020-09-16 at 9 06 11 PM" src="https://user-images.githubusercontent.com/29441672/127089186-588cbc11-adfd-491b-aaa6-9b6322d683e1.png">
+</p>
+
+
+
 
 
 
