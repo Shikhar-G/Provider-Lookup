@@ -1,24 +1,37 @@
-DROP TABLE IF EXISTS core_npi;
+DO $$
+BEGIN
+    IF EXISTS (SELECT * FROM information_schema.tables WHERE table_name = 'core_npi')
+    THEN
+        DROP INDEX core_npi_main;
+        DROP INDEX core_lname;
+        DROP INDEX core_fullname;
+        DROP INDEX core_citystate;
+        DROP INDEX core_zip;
+        DROP INDEX coredescription;
+        DROP INDEX description_citystate;
+        DROP INDEX description_zip;
+        DROP INDEX description_firstlast;
+        TRUNCATE core_npi CASCADE;
+    ELSE
+        CREATE TABLE core_npi(
+            id                              serial primary key,
+            npi                             integer NOT NULL,
+            last_name                       varchar,
+            first_name                      varchar,
+            description                     varchar,
+            state                           varchar,
+            city                            varchar,
+            zip                             varchar,
+            addr_first                      varchar,
+            addr_last                       varchar,
+            phone                           varchar,
 
-------------------------------------------------------------------------------------
-
-CREATE TABLE core_npi(
-    id                              serial primary key,
-    npi                             integer NOT NULL,
-    last_name                       varchar,
-    first_name                      varchar,
-    description                     varchar,
-    state                           varchar,
-    city                            varchar,
-    zip                             varchar,
-    addr_first                      varchar,
-    addr_last                       varchar,
-    phone                           varchar,
-
-    CONSTRAINT core_npi_id
-      FOREIGN KEY(npi)
-	  REFERENCES npi(npi)
-);
+            CONSTRAINT core_npi_id
+              FOREIGN KEY(npi)
+              REFERENCES npi(npi)
+        );
+    END IF;
+END $$;
 
 -- Insert data into core_npi table
 INSERT INTO core_npi(npi, last_name, first_name, description, state, city, zip, addr_first, addr_last, phone)
@@ -33,15 +46,15 @@ WHERE npi.last_name IS NOT NULL AND npi_taxonomy.taxonomy_switch = 'Y';
 
 
 -- Index on core_npi
-CREATE INDEX core_npi_main on core_npi(npi);
-CREATE INDEX core_lname ON core_npi(last_name);
-CREATE INDEX core_fullname on core_npi(last_name, first_name);
-CREATE INDEX core_citystate on core_npi(city, state);
-CREATE INDEX core_zip on core_npi(zip);
-CREATE INDEX coredescription on core_npi(description);
-CREATE INDEX description_citystate on core_npi(description, city, state);
-CREATE INDEX description_zip on core_npi(description, zip);
-CREATE INDEX description_firstlast on core_npi(description, first_name, last_name);
+CREATE INDEX IF NOT EXISTS core_npi_main on core_npi(npi);
+CREATE INDEX IF NOT EXISTS core_lname ON core_npi(last_name);
+CREATE INDEX IF NOT EXISTS core_fullname on core_npi(last_name, first_name);
+CREATE INDEX IF NOT EXISTS core_citystate on core_npi(city, state);
+CREATE INDEX IF NOT EXISTS core_zip on core_npi(zip);
+CREATE INDEX IF NOT EXISTS coredescription on core_npi(description);
+CREATE INDEX IF NOT EXISTS description_citystate on core_npi(description, city, state);
+CREATE INDEX IF NOT EXISTS description_zip on core_npi(description, zip);
+CREATE INDEX IF NOT EXISTS description_firstlast on core_npi(description, first_name, last_name);
 
 ---- Selects
 --SELECT * from core_npi LIMIT 5;

@@ -38,8 +38,6 @@ If you would like to store the latest version in another file, specify the filen
 ### Inserting Data into PostgreSQL
 
 Specify a database name in the corresponding field in the ```config.json``` file of the root directory (default is "test"), then run the following commands.
-
-
 ```commandline
 ./scripts/run_psql.sh -d DATABASE_NAME -e -f sql/all.sql
 ```

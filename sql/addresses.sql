@@ -1,35 +1,48 @@
-DROP TABLE IF EXISTS addresses;
-DROP TABLE IF EXISTS raw_pl;
-----------------------------------------------------------------------------------
+DO $$
+BEGIN
+    IF EXISTS (SELECT * FROM information_schema.tables WHERE table_name = 'raw_pl')
+    THEN
+        DROP INDEX npi_address;
+        TRUNCATE raw_pl CASCADE;
+    ELSE
+        CREATE TABLE raw_pl(
+            npi                              integer NOT NULL,
+            second_add_1                     varchar,
+            second_add_2                     varchar,
+            second_city                      varchar,
+            second_state                     varchar,
+            postal_code                      varchar,
+            country_code                     varchar,
+            phone                            varchar,
+            extension                        varchar,
+            fax                              varchar
+        );
+    END IF;
+END $$;
 
-CREATE TABLE raw_pl(
-    npi                              integer NOT NULL,
-    second_add_1                     varchar,
-    second_add_2                     varchar,
-    second_city                      varchar,
-    second_state                     varchar,
-    postal_code                      varchar,
-    country_code                     varchar,
-    phone                            varchar,
-    extension                        varchar,
-    fax                              varchar 
-);
-
-CREATE TABLE addresses(
-    id                              serial primary key,
-    npi                             integer NOT NULL,
-    line_1                          varchar(55),
-    line_2                          varchar(55),
-    city                            varchar(40),
-    state                           varchar(40),
-    postal                          varchar(20),
-    country                         varchar(2),
-    phone                           varchar(20),
-    fax                             varchar(20),
-    CONSTRAINT addr_npi
-      FOREIGN KEY(npi)
-	  REFERENCES npi(npi)
-);
+DO $$
+BEGIN
+    IF EXISTS (SELECT * FROM information_schema.tables WHERE table_name = 'addresses')
+    THEN
+        TRUNCATE addresses CASCADE;
+    ELSE
+        CREATE TABLE addresses(
+            id                              serial primary key,
+            npi                             integer NOT NULL,
+            line_1                          varchar(55),
+            line_2                          varchar(55),
+            city                            varchar(40),
+            state                           varchar(40),
+            postal                          varchar(20),
+            country                         varchar(2),
+            phone                           varchar(20),
+            fax                             varchar(20),
+            CONSTRAINT addr_npi
+              FOREIGN KEY(npi)
+              REFERENCES npi(npi)
+        );
+     END IF;
+END $$;
 
 ----------------------------------------------------------------------------------
 
@@ -47,7 +60,7 @@ FROM raw_pl;
 ----------------------------------------------------------------------------------
 
 -- Create an index on the taxonomy code
-CREATE INDEX npi_address ON addresses(npi);
+CREATE INDEX IF NOT EXISTS npi_address ON addresses(npi);
 
 ----------------------------------------------------------------------------------
 

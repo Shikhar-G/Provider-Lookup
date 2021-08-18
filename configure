@@ -1,0 +1,162 @@
+#!/bin/bash
+#***************************************************************************************#
+#										        #
+# FILE: configure							        #
+#										        #
+# USAGE: configure [-h] [-u <superuser_name>]  #
+#										        #
+# DESCRIPTION: Ensures software on the host machine is correctly installed and configured for use with the application.			#
+#											#
+# OPTIONS: List options for the script [-h]						#
+#											#
+# ERROR CONDITIONS: exit 1 ---- Invalid option						#
+#                   exit 2 ----	PostgreSQL not installed		              	#
+#                   exit 3 ----	Python3 not installed			#
+#                   exit 4 ----	Pip3 not installed		#
+#                   exit 5 ---- Error accessing superuser in PostgreSQL				#
+#                   exit 6 ---- Error installing Python dependencies			#
+#                   exit 7 ---- Error pulling data sources				#
+#                   exit 8 ---- Error fetching databases from PostgreSQL			#
+#                   exit 9 ---- Error removing databases				#
+#                   exit 10 ---- Error running SQL scripts				#
+#                   exit 11 ---- Error generating secret key				#
+#                   exit 12 ---- Error making database migrations				#
+#                   exit 99 ---	killed by external forces				#
+#											#
+# DEVELOPER: Shikhar Gupta								#
+# DEVELOPER EMAIL: shikhar.gupta.tx@gmail.com 						#
+#											#
+# VERSION: 1.0										#
+# CREATED DATE-TIME: 2020-10-28-07:00 Central Time Zone USA				#
+#											#
+#***************************************************************************************#
+
+# Define the shell functions
+usage(){
+	echo "
+	Usage: $0 [-h] [-u <superuser_name>]
+	Options:
+		-h  Display help message.
+		-u  Specify the superuser name for PostgreSQL. (default: postgres)
+	" >&2
+	exit 0
+}
+
+die()
+{
+	echo $1 >&2
+	exit $2
+}
+
+# Scripts
+
+# Check that there are no arguments passed.
+if [ $# -gt 2 ]; then
+    usage
+fi
+
+superuser="postgres"
+# Database name follows the format "Provider_Lookup_MONTH_YYYY"
+dbname="provider_lookup"
+
+# Parse command line arguments
+while getopts "hu:" opt; do
+	  case $opt in
+	          h) usage
+			 ;;
+            u) superuser=$OPTARG
+        ;;
+		 \?) die "Error---->Invalid option: -$OPTARG" 1
+		     ;;
+	  esac
+done
+
+echo "Verifying software installations..."
+# Verify psql installation exists
+psql --version
+if [[ $? != 0 ]]; then
+	die "Error ----> postgresql not installed. Please install the latest version of PostgreSQL available for your operating system." 2
+fi
+
+# Verify python3 installation exists
+python3 --version
+if [[ $? != 0 ]]; then
+	die "Error ----> python3 not installed. Please install the latest version of Python 3 available for your operating system." 3
+fi
+
+# Verify pip3 installation exists
+pip3 --version
+if [[ $? != 0 ]]; then
+	die "Error ----> pip3 not installed. Please install the latest version of Pip available for your operating system." 4
+fi
+
+## Ensure access to postgres superuser
+psql -U $superuser -c '\q'
+if [[ $? != 0 ]]; then
+	die "Error ----> Superuser for PostgreSQL does not exist or access denied." 5
+fi
+
+# Install python libraries
+echo "Installing Python dependencies..."
+pip3 install -r requirements.txt
+if [[ $? != 0 ]]; then
+	die "Error ----> Error installing python libraries." 6
+fi
+
+# Get data files
+echo "Pulling data..."
+python3 scripts/data.py
+if [[ $? != 0 ]]; then
+	die "Error ----> Error pulling data from NPPES." 7
+fi
+
+# Create the configuration file for Django
+echo "Creating config.json"
+cat << EOF | cat > config.json
+{
+  "default": {
+    "ENGINE": "django.db.backends.postgresql",
+    "NAME": "$dbname"
+  }
+}
+EOF
+
+# From https://stackoverflow.com/questions/54745619/drop-multiple-database-in-postgresql-using-a-wildcard
+# Remove all existing provider lookup databases
+echo "Removing existing provider lookup databases"
+db=$(psql -U $superuser -t -c '\l')
+if [[ $? != 0 ]]; then
+		die "Error fetching databases." 8
+fi
+for database in `echo "$db" | grep 'provider_lookup*' | cut -d '|' -f 1`;
+    do echo "Dropping database $database .."
+    psql -U $superuser -c "drop database \"$database\"";
+    if [[ $? != 0 ]]; then
+		    die "Error removing databases." 9
+    fi
+    done
+
+# Create the new database and run the SQL scripts
+echo "Creating Provider Lookup database and running SQL scripts..."
+./scripts/run_psql.sh -c -d $dbname -e -f sql/all.sql
+if [[ $? != 0 ]]; then
+    die "Error running SQL Scripts." 10
+fi
+
+# Generate the Django secret key
+echo "Generating secret key for Django.."
+python3 scripts/generate_secret.py
+if [[ $? != 0 ]]; then
+    die "Error generating key." 11
+fi
+
+# Apply database migrations for Django
+echo "Make database migrations for Django.."
+python3 web/manage.py migrate
+if [[ $? != 0 ]]; then
+    die "Error making database migrations." 12
+fi
+
+# Finished successfully
+echo "All done!"
+exit 0
