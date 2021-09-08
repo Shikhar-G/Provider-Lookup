@@ -2,10 +2,10 @@ DO $$
 BEGIN
     IF EXISTS (SELECT * FROM information_schema.tables WHERE table_name = 'npi')
     THEN
-        DROP INDEX npi_main;
-        DROP INDEX lname;
-        DROP INDEX citystate;
-        DROP INDEX fullname;
+        DROP INDEX IF EXISTS npi_main;
+        DROP INDEX IF EXISTS lname;
+        DROP INDEX IF EXISTS citystate;
+        DROP INDEX IF EXISTS fullname;
         TRUNCATE npi CASCADE;
     ELSE
         CREATE TABLE npi(
@@ -348,7 +348,7 @@ DO $$
 BEGIN
 IF EXISTS (SELECT * FROM information_schema.tables WHERE table_name = 'npi_taxonomy')
     THEN
-        DROP INDEX npi_tax;
+        DROP INDEX IF EXISTS npi_tax;
         TRUNCATE npi_taxonomy CASCADE;
     ELSE
         CREATE TABLE npi_taxonomy(

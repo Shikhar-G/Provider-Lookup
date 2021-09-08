@@ -2,7 +2,7 @@ DO $$
 BEGIN
     IF EXISTS (SELECT * FROM information_schema.tables WHERE table_name = 'taxonomy')
     THEN
-        DROP INDEX idx_code;
+        DROP INDEX IF EXISTS idx_code;
         TRUNCATE taxonomy CASCADE;
     ELSE
         CREATE TABLE taxonomy(

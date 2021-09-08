@@ -2,15 +2,15 @@ DO $$
 BEGIN
     IF EXISTS (SELECT * FROM information_schema.tables WHERE table_name = 'core_npi')
     THEN
-        DROP INDEX core_npi_main;
-        DROP INDEX core_lname;
-        DROP INDEX core_fullname;
-        DROP INDEX core_citystate;
-        DROP INDEX core_zip;
-        DROP INDEX coredescription;
-        DROP INDEX description_citystate;
-        DROP INDEX description_zip;
-        DROP INDEX description_firstlast;
+        DROP INDEX IF EXISTS core_npi_main;
+        DROP INDEX IF EXISTS core_lname;
+        DROP INDEX IF EXISTS core_fullname;
+        DROP INDEX IF EXISTS core_citystate;
+        DROP INDEX IF EXISTS core_zip;
+        DROP INDEX IF EXISTS coredescription;
+        DROP INDEX IF EXISTS description_citystate;
+        DROP INDEX IF EXISTS description_zip;
+        DROP INDEX IF EXISTS description_firstlast;
         TRUNCATE core_npi CASCADE;
     ELSE
         CREATE TABLE core_npi(

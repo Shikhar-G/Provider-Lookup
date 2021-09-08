@@ -103,24 +103,6 @@ if [[ $? != 0 ]]; then
 	die "Error ----> Error installing python libraries." 6
 fi
 
-# Get data files
-echo "Pulling data..."
-python3 scripts/data.py
-if [[ $? != 0 ]]; then
-	die "Error ----> Error pulling data from NPPES." 7
-fi
-
-# Create the configuration file for Django
-echo "Creating config.json"
-cat << EOF | cat > config.json
-{
-  "default": {
-    "ENGINE": "django.db.backends.postgresql",
-    "NAME": "$dbname"
-  }
-}
-EOF
-
 # From https://stackoverflow.com/questions/54745619/drop-multiple-database-in-postgresql-using-a-wildcard
 # Remove all existing provider lookup databases
 echo "Removing existing provider lookup databases"
@@ -141,20 +123,6 @@ echo "Creating Provider Lookup database and running SQL scripts..."
 ./scripts/run_psql.sh -c -d $dbname -e -f sql/all.sql
 if [[ $? != 0 ]]; then
     die "Error running SQL Scripts." 10
-fi
-
-# Generate the Django secret key
-echo "Generating secret key for Django.."
-python3 scripts/generate_secret.py
-if [[ $? != 0 ]]; then
-    die "Error generating key." 11
-fi
-
-# Apply database migrations for Django
-echo "Make database migrations for Django.."
-python3 web/manage.py migrate
-if [[ $? != 0 ]]; then
-    die "Error making database migrations." 12
 fi
 
 # Finished successfully
