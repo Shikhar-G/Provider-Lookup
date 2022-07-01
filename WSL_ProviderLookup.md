@@ -5,9 +5,11 @@
 ### 1. Install Linux with WSL
 - ***[Install Linux Tutorial](https://docs.microsoft.com/en-us/windows/wsl/install)***  
 - Entering this command in an **administrator** PowerShell or Windows Command Prompt
-    ``` 
+   
+   ``` 
     wsl --install 
     ```
+
 - Restart machine
 
 ### 2. Set up Linux
@@ -15,27 +17,37 @@
 - Open the distribution (**Ubuntu** by default) using the Start menu
 - Create a User Name and Password
 - Update and upgrade packages (optional but recommended)
-    ```
+   
+   ```
     sudo apt update && sudo apt upgrade
     ```
+
 ### 3. Install PostgreSQL
 - ***[Insatll PostgreSQL Tutorial](https://docs.microsoft.com/en-us/windows/wsl/tutorials/wsl-database)***
 - Install PostgreSQL    
-    ```
+   
+   ```
     sudo apt install postgresql postgresql-contrib
     ```
+
 - Confirm installation and get the version number   
-    ```
+   
+   ```
     psql --version
     ```
+
 - Start postgres service  
+
     ```
     sudo service postgresql start
     ```
+
 - Set a password for default admin user, ```postgres```    
+ 
     ```
     sudo passwd postgres
     ```
+
 - Connect to the postgres service and open the psql shell  
     
     ```
