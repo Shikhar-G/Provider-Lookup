@@ -14,12 +14,12 @@ The data sources for this application come from the [NPPES official website](htt
 
 The field `entity_type` contains the Entity type code in integer type which has two valid values: 1(individual) and 2(organization). However, there are a lot of records whose entity_type is `null`.
 
-|       | Entity Type Code | Entity Type Description |
-| ----: | :--------------: | :---------------------: |
-|     1 |     5540092      |       Individual        |
-|     2 |     1549790      |      Organization       |
-|  NULL |     7089882      |                         |
-| Total |     7311378      |                         |
+|           | Entity Type Code | Entity Type Description |
+| --------: | :--------------: | :---------------------: |
+|         1 |     5540092      |       Individual        |
+|         2 |     1549790      |      Organization       |
+|      NULL |     7089882      |                         |
+| **Total** |     7311378      |                         |
 
 > **Note:** you need to modify foreign key constraint in the tables including *core_npi,* *addresses*, *npi_taxonomy*, and *taxonomy* before executing the deletion operation, they are the child tables to the table *npi*. Otherwise, your deletion operation will be rejected by PostgreSQL in order to maintain the referential integrity of data between the child and parent tables.
 
@@ -33,7 +33,95 @@ The field `entity_type` contains the Entity type code in integer type which has 
 - Delete records where entity_type is null from all tables in the database
 
   ```sql
-  delete from npi where entity_type is null;
+  DELETE FROM npi WHERE entity_type IS NULL;
+  ```
+
+### 2.2 Delete records where state code is invalid
+
+- Display different values exsites for the field 
+
+  ```sql
+  SELECT addr_practice_state, COUNT(*) as COUNT from npi GROUP BY addr_practice_state;
+  ```
+
+- Create a state table which contain valid information of state code and state name
+
+  ```sql
+  CREATE TABLE state (
+      state_code           char(2) PRIMARY KEY,
+      state_name           varchar NOT NULL,
+      display_order        integer default nextval('state_display_order_seq')
+  ); 
+  
+  COPY state(state_code,state_name) FROM stdin DELIMITER ':';
+  AL:ALABAMA
+  AK:ALASKA
+  AS:AMERICAN SAMOA
+  AZ:ARIZONA
+  AR:ARKANSAS
+  CA:CALIFORNIA
+  CO:COLORADO
+  CT:CONNECTICUT
+  DE:DELAWARE
+  DC:DISTRICT OF COLUMBIA
+  FM:FEDERATED STATES OF MICRONESIA
+  FL:FLORIDA
+  GA:GEORGIA
+  GU:GUAM
+  HI:HAWAII
+  ID:IDAHO
+  IL:ILLINOIS
+  IN:INDIANA
+  IA:IOWA
+  KS:KANSAS
+  LA:LOUISIANA
+  ME:MAINE
+  MH:MARSHALL ISLANDS
+  MD:MARYLAND
+  MA:MASSACHUSETTS
+  MI:MICHIGAN
+  MN:MINNESOTA
+  MS:MISSISSIPPI
+  MO:MISSOURI
+  MT:MONTANA
+  NE:NEBRASKA
+  NV:NEVADA
+  NH:NEW HAMPSHIRE
+  NJ:NEW JERSEY
+  NM:NEW MEXICO
+  NY:NEW YORK
+  NC:NORTH CAROLINA
+  ND:NORTH DAKOTA
+  MP:NORTHERN MARIANA ISLANDS
+  OH:OHIO
+  OK:OKLAHOMA
+  OR:OREGON
+  PW:PALAU
+  PA:PENNSYLVANIA
+  PR:PUERTO RICO
+  RI:RHODE ISLAND
+  SC:SOUTH CAROLINA
+  SD:SOUTH DAKOTA
+  TN:TENNESSEE
+  TX:TEXAS
+  UT:UTAH
+  VT:VERMONT
+  VI:VIRGIN ISLANDS
+  VA:VIRGINIA
+  WA:WASHINGTON
+  WV:WEST VIRGINIA
+  WI:WISCONSIN
+  WY:WYOMING
+  AE:Arm Frc Afr/Canada/Eur/MidEast
+  AA:Armed Forces Americas
+  AP:Armed Forces Pacific
+  \.
+  ```
+
+- Delete records in the database whose state code cannot be found in the state table
+
+  ```sql
+  DELETE FROM npi WHERE npi.addr_practice_state NOT IN (SELECT DISTINCT(state_code) FROM state); 
   ```
 
 ## 3. Future Work
