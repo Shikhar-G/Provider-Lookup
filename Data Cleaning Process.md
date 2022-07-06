@@ -2,8 +2,6 @@
 
 [TOC]
 
-
-
 ## 1. Overview
 
 The data sources for this application come from the [NPPES official website](https://download.cms.gov/nppes/NPI_Files.html), which provides monthly replaced NPI Files in ZIP format. In the download bundle, the *Data Dissemination File – Code Values* document provides the descriptions of the various reference codes used in the Data file. Based on the code values, this documentation is designed to identify, delete and/or replace inconsistent or incorrect information from the database.
@@ -123,5 +121,11 @@ The field `entity_type` contains the Entity type code in integer type which has 
   ```sql
   DELETE FROM npi WHERE npi.addr_practice_state NOT IN (SELECT DISTINCT(state_code) FROM state); 
   ```
+
+  [1]: https://stackoverflow.com/questions/15959061/delete-records-which-do-not-have-a-match-in-another-
+  [2]: https://stackoverflow.com/questions/21426630/different-between-not-in-and-not-exists-in-postgres-sql
+  [3]: https://linuxhint.com/count-unique-values-postgresql/
+
+
 
 ## 3. Future Work
