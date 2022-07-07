@@ -18,6 +18,7 @@
       {% if result %}
         <table class="table auto table-striped table-bordered table-hover text-center">
             <thead>
+                <th scope="col-auto"><a style="color:black; text-decoration:none" href="?{% url_replace request 'order_by' 'npi' '-' %}">NPI</a></th>
                 <th scope="col-auto"><a style="color:black; text-decoration:none" href="?{% url_replace request 'order_by' 'last_name' '-' %}">Last</a></th>
                 <th scope="col-auto"><a style="color:black; text-decoration:none" href="?{% url_replace request 'order_by' 'first_name' '-' %}">First</a></th>
                 <th scope="col-auto"><a style="color:black; text-decoration:none" href="?{% url_replace request 'order_by' 'description' '-' %}">Description</a></th>
@@ -29,6 +30,7 @@
                 {% for r in result %}
                 <tr onclick="document.location = '/provider/{{ r.id }}';">
                     <td><a href="/provider/{{ r.id }}">{{ r.last_name }}</a></td>
+                    <td>{{ r.npi }} </td>
                     <td>{{ r.first_name }} </td>
                     <td>{{ r.description }}</td>
                     <td>{% replace_phone r.phone %}</td>
