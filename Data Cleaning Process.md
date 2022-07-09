@@ -110,12 +110,9 @@ The field `entity_type` contains the Entity type code in integer type which has 
   WV:WEST VIRGINIA
   WI:WISCONSIN
   WY:WYOMING
-  AE:Arm Frc Afr/Canada/Eur/MidEast
-  AA:Armed Forces Americas
-  AP:Armed Forces Pacific
   \.
   ```
-
+  
 - Delete records in the database whose state code cannot be found in the state table
 
   ```sql
@@ -126,6 +123,14 @@ The field `entity_type` contains the Entity type code in integer type which has 
   [2]: https://stackoverflow.com/questions/21426630/different-between-not-in-and-not-exists-in-postgres-sql
   [3]: https://linuxhint.com/count-unique-values-postgresql/
 
+- Checj=k the number of different values in *address_practice_state* after deletion 
 
+  ```sql
+  SELECT COUNT(*) FROM (SELECT addr_practice_state FROM npi) AS COUNTS;
+  ```
+
+  [1]: https://linuxhint.com/count-unique-values-postgresql/
+
+  
 
 ## 3. Future Work
