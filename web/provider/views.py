@@ -20,7 +20,7 @@ def search(request):
         return redirect('index')
     # unpack the arguments and pass into the filter
     page = request.GET.get('page', 1)
-    result = CoreNpi.objects.filter(**args).order_by(request.GET.get('order_by', 'last_name'), 'last_name', 'first_name')
+    result = CoreNpi.objects.filter(**args).order_by(request.GET.get('order_by', 'last_name'), 'last_name', 'first_name', 'npi', 'description')
     paginator = Paginator(result, 50)
     # render results
     try:
