@@ -38,7 +38,7 @@ cat << EOF | cat > config.json
 {
   "default": {
     "ENGINE": "django.db.backends.postgresql",
-    "NAME": "provider_lookup"
+    "NAME": "test"
   }
 }
 EOF
