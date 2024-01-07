@@ -28,12 +28,11 @@ pip3 install -r requirements.txt
 ### Pulling Data
 
 ```commandline
-python3 scripts/data.py
+python3 scripts/data.py -d DATA_DIR
 ```
-This will pull the latest dataset from the NPPES website into the ```data``` directory and store the latest filename in ```curr.txt```.
+This will pull the latest NPI and taxonomy datasets  into the ```DATA_DIR``` directory and store the latest filenames in ```curr_npi.txt``` and ```curr_taxonomy.txt``` by default, respectively, to check for updates. 
 
-If you would like to store the latest version in another file, specify the filename by running the above command with the ``-c`` flag. To force update the dataset, even if the version stored in
-```curr.txt``` matches the version on the NPPES website, run the above command with the ```-f``` flag.
+If you would like to store the latest version in another file, specify the filename by running the above command with the ``--currnpi`` flag for the NPI dataset and ```--currtaxonomy``` flag for the taxonomy dataset. To force update the datasets, run the above command with the ```-f``` flag.
 
 ### Inserting Data into PostgreSQL
 
