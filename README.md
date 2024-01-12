@@ -36,13 +36,28 @@ If you would like to store the latest version in another file, specify the filen
 
 ### Inserting Data into PostgreSQL
 
-Specify a database name in the corresponding field in the ```config.json``` file of the root directory (default is "test"), then run the following commands.
+Modify the ```"NAME"```, ```"USER'```, and ```"PASSWORD"``` fields in the ```config.json``` file of the root directory with the respective database name, postgres username, and postgres password, then run the following commands. If you would like to use the postgres user by default, delete the ```"USER"``` and ```"PASSWORD"``` fields entirely.
 ```commandline
 ./scripts/run_psql.sh -d DATABASE_NAME -e -f sql/all.sql
 ```
-If the database specified does not yet exist, include the ```-c``` flag in the call to the ```run_psql.sh``` command to create the database.
+If the database name specified does not yet exist, include the ```-c``` flag in the call to the ```run_psql.sh``` command to create the database.
 
-Note: This may take a long time to run as the data file to process is more than 8 GB in size.
+#### Postgres User Configuration
+
+To create a new user for use with the application or grant an existing user permissions to the database, follow the below instructions.
+
+```commandline
+psql <DATABASE_NAME>
+```
+To create a user *(optional, if user doesn't already exist)*:
+```commandline
+CREATE USER <NAME> with PASSWORD <PASSWORD>;
+```
+To grant access to the tables for the database.
+```commandline
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO <USERNAME>;
+```
+The last command can be modified if the database used contains other tables not included in this application.
 
 ### Django Setup
 

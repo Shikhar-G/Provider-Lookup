@@ -1,6 +1,8 @@
 {
   "default": {
     "ENGINE": "django.db.backends.postgresql",
-    "NAME": "test"
+    "NAME": "test",
+    "USER": "user",
+    "PASSWORD": "pass"
   }
 }

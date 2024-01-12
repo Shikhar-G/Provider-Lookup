@@ -2,18 +2,19 @@
 # 										        #
 # FILE: data.py								       	        #
 # 										        #
-# USAGE: data.py [-h] [-f] [--currnpi CURRNPI] [--currtaxonomy CURRTAXONOMY] -d DATA					#
+# USAGE: data.py [-h] [-f] [--currnpi CURRNPI] [--currtaxonomy CURRTAXONOMY] -d DATA	#
 # 										        #
 # DESCRIPTION: Downloads NPI data files from NPPES onto the local machine.		#
 # 											#
 # OPTIONS: List options for the script [-h]						#
-# optional arguments:   #
-# -h, --help            show this help message and exit #
-#  -f, --force           force update of csv files #
-#  --currnpi CURRNPI     filepath to current npi file (default: curr_npi.txt) #
-#  --currtaxonomy CURRTAXONOMY #
-#                        filepath to current taxonomy file (default: curr_taxonomy.txt) #
-#  -d DATA, --data DATA  path to data folder to store files, will create if it does not exist #
+# optional arguments:   								#
+# -h, --help            show this help message and exit 				#
+# -f, --force           force update of csv files 					#
+# --currnpi CURRNPI     filepath to current npi file (default: curr_npi.txt) 		#
+# --currtaxonomy CURRTAXONOMY 								#
+#                       filepath to current taxonomy file (default: curr_taxonomy.txt)  #
+#  -d DATA, --data DATA path to data folder to store files, will create if it does not  #
+#			 exist 								#
 # 											#
 # 											#
 # DEVELOPER: Shikhar Gupta								#
