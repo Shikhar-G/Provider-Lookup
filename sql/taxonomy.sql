@@ -12,18 +12,16 @@ BEGIN
             classification       varchar,
             specialization       varchar,
             definition           varchar,
-            effective_date       varchar,
-            deactivation_date    varchar,
-            last_mod_date        varchar,
             notes                varchar,
-            display_name         varchar
+            display_name         varchar,
+            section              varchar
         );
     END IF;
 END $$;
 
 ----------------------------------------------------------------------------------
 
-\copy taxonomy(code, grouping, classification, specialization, definition, effective_date, deactivation_date, last_mod_date, notes, display_name) FROM '../data/taxonomy.csv' DELIMITER ',' CSV HEADER
+\copy taxonomy(code, grouping, classification, specialization, definition, notes, display_name, section) FROM '../data/taxonomy.csv' DELIMITER ',' CSV HEADER
 
 ----------------------------------------------------------------------------------
 

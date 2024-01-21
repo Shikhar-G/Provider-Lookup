@@ -2,7 +2,7 @@ DO $$
 BEGIN
     IF EXISTS (SELECT * FROM information_schema.tables WHERE table_name = 'raw_pl')
     THEN
-        DROP INDEX npi_address;
+        DROP INDEX IF EXISTS npi_address;
         TRUNCATE raw_pl CASCADE;
     ELSE
         CREATE TABLE raw_pl(

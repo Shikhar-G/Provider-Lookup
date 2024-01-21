@@ -3,7 +3,7 @@
 #										        #
 # FILE: run_psql.sh								        #
 #										        #
-# USAGE: run_psql.sh [-h] [-d <database_name>] [-c] [-e] -f <path>   #
+# USAGE: run_psql.sh [-h] [-d <database_name>] [-c] [-e] -u <username> -f <path>   #
 #										        #
 # DESCRIPTION: Runs a SQL file or all SQL file from a folder.				#
 #											#
@@ -28,13 +28,14 @@
 # Define the shell functions
 usage(){
 	echo "
-	Usage: $0 [-h] [-d <database_name>] [-c] [-e] -f <path>
+	Usage: $0 [-h] [-d <database_name>] [-c] [-e] -u <username> -f <path>
 
 	Options:
 		-h 	Display help message.
 		-d	Specify a database name (Default is \"test\").
 		-c	Create the database (should not already exist).
 		-e 	Stop on error messages in the psql script.
+		-u	Specify a postgres username to connect as.
 		-f	Specify a folder or .sql filename (Required).
 	" >&2
 	exit 0
@@ -57,7 +58,7 @@ parse_file()
 	((count++))
 	# Run a single sql file
 	echo -e "\n*****  Processing $file *****\n"
-	toRun="${cmd} -f ${file}"
+	toRun="${cmd} -U ${username} -f ${file}"
 	eval " $toRun"
 	# check status within the script
 	if [[ $? != 0 ]]; then
@@ -80,12 +81,13 @@ parse_directory()
 # Scripts
 
 # Check that there is at least one argument passed
-if [ $# -lt 1 ]; then
+if [ $# -lt 2 ]; then
     usage
 fi
 
 # Initialize variables, default database name is 'test'
 fname=""
+username=""
 database="test"
 create=false
 directory=false
@@ -94,13 +96,15 @@ count=0
 
 
 # Parse command line arguments
-while getopts "hcf:d:e" opt; do
+while getopts "hcf:d:u:e" opt; do
 	  case $opt in
 	          h) usage
 			 ;;
               f) fname=$OPTARG
              ;;
 			  d) database=$OPTARG
+			 ;;
+			  u) username=$OPTARG
 			 ;;
 			  c) create=true
 			 ;;
@@ -115,6 +119,12 @@ done
 psql --version
 if [[ $? != 0 ]]; then
 	die "Error ----> postgresql not installed." 2
+fi
+
+# Check if username was given
+if [ -z "$username" ]
+then
+	die "Error----> Please enter a username." 3
 fi
 
 # Check if it's a directory
@@ -136,7 +146,7 @@ fi
 # Create database
 if [ "$create" = true ]
 then
-	createdb $database
+	createdb $database -U $username
 	if [[ $? != 0 ]]; then
 		die "Error ----> database already exists." 4
 	fi

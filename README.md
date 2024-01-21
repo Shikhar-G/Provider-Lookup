@@ -15,7 +15,9 @@ https://www.nucc.org/index.php/code-sets-mainmenu-41/provider-taxonomy-mainmenu-
 ## Requirements
 
 This application requires Python3, pip, and [PostgreSQL](
-https://www.postgresql.org/download) to be installed on the host machine prior to installation of the application software. About 10GB of free space is also required.
+https://www.postgresql.org/download) to be installed on the host machine prior to installation of the application software. About 10GB of free space is also required. 
+
+Additionally, this application requires a **Google Maps API key**. Instructions for obtaining a free API key can be found here: https://developers.google.com/maps/documentation/embed/cloud-setup. Follow the "Set up your Google Cloud Project" section and the "Create API Keys" subsection under "Use your API Keys".
 
 ## Installation
 Run all commands from the root directory. It is highly recommended to set up the application in a Python 3 Virtual Environment.
@@ -34,38 +36,50 @@ This will pull the latest NPI and taxonomy datasets  into the ```DATA_DIR``` dir
 
 If you would like to store the latest version in another file, specify the filename by running the above command with the ``--currnpi`` flag for the NPI dataset and ```--currtaxonomy``` flag for the taxonomy dataset. To force update the datasets, run the above command with the ```-f``` flag.
 
+
 ### Inserting Data into PostgreSQL
 
-Modify the ```"NAME"```, ```"USER'```, and ```"PASSWORD"``` fields in the ```config.json``` file of the root directory with the respective database name, postgres username, and postgres password, then run the following commands. If you would like to use the postgres user by default, delete the ```"USER"``` and ```"PASSWORD"``` fields entirely.
-```commandline
-./scripts/run_psql.sh -d DATABASE_NAME -e -f sql/all.sql
-```
-If the database name specified does not yet exist, include the ```-c``` flag in the call to the ```run_psql.sh``` command to create the database.
+#### (Optional) *Create a Postgres User for the Application*
+Follow these steps if you need to configure a new postgres user for use in the application.
 
-#### Postgres User Configuration
+To create a new user for use with the application, follow the below instructions *(note: you must have access to the postgres superuser to create another user)*.
 
-To create a new user for use with the application or grant an existing user permissions to the database, follow the below instructions.
+<pre>
+createuser <b>username</b> -d -P
+</pre>
 
-```commandline
-psql <DATABASE_NAME>
+This command will create a new postgres user with the ability to create databases (the ```-d``` flag), and the command will also prompt you to create a password for the new user (the ```-P``` flag). 
+
+More options can be found at https://www.postgresql.org/docs/current/app-createuser.html
+
+#### Configure options for the database
+
+Modify the ```"NAME"```, ```"USER'```, and ```"PASSWORD"``` fields in the ```config.json``` file of the root directory with the respective database name, postgres username, and postgres password (if set), then run the following command.
 ```
-To create a user *(optional, if user doesn't already exist)*:
-```commandline
-CREATE USER <NAME> with PASSWORD <PASSWORD>;
+./scripts/run_psql.sh -c -d DATABASE_NAME -U USERNAME -e -f sql/all.sql
 ```
-To grant access to the tables for the database.
-```commandline
-GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO <USERNAME>;
-```
-The last command can be modified if the database used contains other tables not included in this application.
+If the database specified already exists, omit the ```-c``` flag in the call to the ```run_psql.sh``` command to create the database. However, if this is the case, make sure the postgres user specified has all necessary permissions in the database specified.
+
+*Note: this script may take a few hours to run due to the large amount of data. Only run this step if there is ample time for the script to run. If the script is interrupted, it is safe to run it again, but run it without the ```-c``` flag as the database will have already been created.*
 
 ### Django Setup
+
+#### Generate Secret
 
 A unique Django secret key must be generated with the following command.
 ```commandline
 python3 scripts/generate_secret.py
 ```
 
+#### Add Google Maps API Key
+Navigate to ```web/.env``` (which was created in the previous step).
+
+Append this line to the end of the file:
+```
+GOOGLE_MAPS_API_KEY = YOUR_API_KEY
+```
+
+#### Migrate
 Then, necessary migrations from PostgreSQL to Django need to be made for the server to use the PostgreSQL database.
 
 ```commandline
@@ -80,6 +94,10 @@ The server will run on port 8000 by default on localhost.
 ```commandline
 python3 web/manage.py runserver
 ```
+
+## Notes
+- For any issues, feel free to post an issue on the GitHub page.
+- Make sure not to commit the ```config.json``` file. It is not ignored by default so that there is a template file to use for the application, but any information stored here about the database connection should be kept confidential.
 ## Screenshots
 <p align="center">
 <img width="650" alt="Screen Shot 2020-09-16 at 9 06 11 PM" src="https://user-images.githubusercontent.com/29441672/127089060-90563990-8e2e-4e3a-ae81-f2bf90978496.png">
